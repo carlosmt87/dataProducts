@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MPG prediction Shiny application</title>
+  <meta charset="utf-8">
+  <meta name="description" content="MPG prediction Shiny application">
+  <meta name="author" content="Carlos Trejo">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>MPG prediction Shiny application</h1>
+    <h2>Developing Data Products Coursera Class</h2>
+    <p>Carlos Trejo<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Model Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>The data for the prediction model comes from the mtcars dataset</li>
+</ol>
+
+<pre><code>##       mpg         cyl          disp             hp             drat     
+##  Min.   :10.4   4cyl:11   Min.   : 71.1   Min.   : 52.0   Min.   :2.76  
+##  1st Qu.:15.4   6cyl: 7   1st Qu.:120.8   1st Qu.: 96.5   1st Qu.:3.08  
+##  Median :19.2   8cyl:14   Median :196.3   Median :123.0   Median :3.69  
+##  Mean   :20.1             Mean   :230.7   Mean   :146.7   Mean   :3.60  
+##  3rd Qu.:22.8             3rd Qu.:326.0   3rd Qu.:180.0   3rd Qu.:3.92  
+##  Max.   :33.9             Max.   :472.0   Max.   :335.0   Max.   :4.93  
+##        wt            qsec      vs             am         gear    carb  
+##  Min.   :1.51   Min.   :14.5   0:18   Automatic:19   3gears:15   1: 7  
+##  1st Qu.:2.58   1st Qu.:16.9   1:14   Manual   :13   4gears:12   2:10  
+##  Median :3.33   Median :17.7                         5gears: 5   3: 3  
+##  Mean   :3.22   Mean   :17.8                                     4:10  
+##  3rd Qu.:3.61   3rd Qu.:18.9                                     6: 1  
+##  Max.   :5.42   Max.   :22.9                                     8: 1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Prediction model</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>The application uses a multiple linear regression model using horsepower, weight and the type of trasmission as predictors</li>
+</ol>
+
+<pre><code class="r"> lm &lt;- lm(mpg ~ hp + wt + am, data=mtcars)
+ coef(lm)
+</code></pre>
+
+<pre><code>## (Intercept)          hp          wt    amManual 
+##    34.00288    -0.03748    -2.87858     2.08371
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Shiny app input</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>In the application, there&#39;s a slider to select car horsepower and weight.
+There is also an option to select the type of transmission: Automatic or manual.</p>
+
+<p><img src="assets/img/input.jpg" alt="width"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Shiny app output</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>According to the linear model, the prediction results are displayed. </p>
+
+<p>For comparative reasons, the obtained value is shown together with a density plot of the mpg values of the dataset.</p>
+
+<p>This way, you can estimate visually the area under the curve so that you can know how many cars presented lower or higher mpg values in the dataset.</p>
+
+<p><img src="assets/img/output.jpg" alt="width"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Model Data'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Prediction model'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Shiny app input'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Shiny app output'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

@@ -1,0 +1,64 @@
+---
+title       : MPG prediction Shiny application
+subtitle    : Developing Data Products Coursera Class
+author      : Carlos Trejo
+logo        : 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Model Data
+
+1. The data for the prediction model comes from the mtcars dataset
+
+```{r echo=FALSE}
+ library(ggplot2)
+data(mtcars)
+#Factor the necessary variables
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),
+   labels=c("4cyl","6cyl","8cyl")) 
+mtcars$vs <- as.factor(mtcars$vs) 
+mtcars$am <- factor(mtcars$am,levels=c(0,1),labels=c("Automatic","Manual"))
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),
+    labels=c("3gears","4gears","5gears")) 
+mtcars$carb <- as.factor(mtcars$carb) 
+summary(mtcars)
+```
+
+
+--- .class #id 
+
+## Prediction model
+
+1. The application uses a multiple linear regression model using horsepower, weight and the type of trasmission as predictors
+
+```{r}
+ lm <- lm(mpg ~ hp + wt + am, data=mtcars)
+ coef(lm)
+```
+
+--- 
+## Shiny app input
+
+In the application, there's a slider to select car horsepower and weight.
+There is also an option to select the type of transmission: Automatic or manual.
+
+![width](assets/img/input.jpg)
+
+
+--- 
+## Shiny app output
+
+According to the linear model, the prediction results are displayed. 
+
+For comparative reasons, the obtained value is shown together with a density plot of the mpg values of the dataset.
+
+This way, you can estimate visually the area under the curve so that you can know how many cars presented lower or higher mpg values in the dataset.
+
+![width](assets/img/output.jpg)
+

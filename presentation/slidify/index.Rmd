@@ -48,7 +48,7 @@ summary(mtcars)
 In the application, there's a slider to select car horsepower and weight.
 There is also an option to select the type of transmission: Automatic or manual.
 
-![width](assets/img/input.jpg)
+![width](assets/img/input.JPG)
 
 
 --- 
